@@ -2,10 +2,12 @@ package com.bridgelab.employeeWage.service;
 
 import com.bridgelab.employeeWage.dto.EmployeePayrollDTO;
 import com.bridgelab.employeeWage.model.EmployeePayrollData;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class EmployeePayrollService implements IEmployeePayrollService{
 
     List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
