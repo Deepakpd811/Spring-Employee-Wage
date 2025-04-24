@@ -4,6 +4,7 @@ import com.bridgelab.employeeWage.dto.EmployeePayrollDTO;
 import com.bridgelab.employeeWage.model.EmployeePayrollData;
 import com.bridgelab.employeeWage.dto.ResponseDTO;
 import com.bridgelab.employeeWage.service.IEmployeePayrollService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +39,7 @@ public class EmployeePayrollController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> addEmployeePayrollData(@RequestBody EmployeePayrollDTO empPayrollDTO) {
+    public ResponseEntity<ResponseDTO> addEmployeePayrollData(@Valid @RequestBody EmployeePayrollDTO empPayrollDTO) {
         log.info("Creating a new contact");
         EmployeePayrollData empData = null;
         empData = employeePayrollService.createEmployeePayrollData(empPayrollDTO);
@@ -47,7 +48,7 @@ public class EmployeePayrollController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable int id, @RequestBody EmployeePayrollDTO empPayrollDTO) {
+    public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable int id,@Valid @RequestBody EmployeePayrollDTO empPayrollDTO) {
         log.info("Updating contact with ID: {}", id);
         EmployeePayrollData empData = null;
         empData = employeePayrollService.updateEmployeePayrollDataById(id,empPayrollDTO);
