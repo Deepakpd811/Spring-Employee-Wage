@@ -1,6 +1,7 @@
 package com.bridgelab.employeeWage.service;
 
 import com.bridgelab.employeeWage.dto.EmployeePayrollDTO;
+import com.bridgelab.employeeWage.exception.EmployeePayrollException;
 import com.bridgelab.employeeWage.model.EmployeePayrollData;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class EmployeePayrollService implements IEmployeePayrollService{
+public class EmployeePayrollService implements IEmployeePayrollService {
 
     List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
 
@@ -21,14 +22,19 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     // Get employee by id
     @Override
     public EmployeePayrollData getEmployeePayrollDataById(int id) {
-        return employeePayrollDataList.get(id-1);
+
+        return employeePayrollDataList
+                .stream()
+                .filter(empdata -> empdata.getId() == id)
+                .findFirst()
+                .orElseThrow(()-> new EmployeePayrollException("Employee not found"));
     }
 
     // Create employee
     @Override
     public EmployeePayrollData createEmployeePayrollData(EmployeePayrollDTO dto) {
         EmployeePayrollData emp = null;
-        emp = new EmployeePayrollData(employeePayrollDataList.size()+1, dto);
+        emp = new EmployeePayrollData(employeePayrollDataList.size() + 1, dto);
         employeePayrollDataList.add(emp);
         return emp;
     }
@@ -36,7 +42,7 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     // Update the employee
     @Override
     public EmployeePayrollData updateEmployeePayrollDataById(int id, EmployeePayrollDTO dto) {
-        EmployeePayrollData emp= this.getEmployeePayrollDataById(id);
+        EmployeePayrollData emp = this.getEmployeePayrollDataById(id);
         emp.setName(dto.getName());
         emp.setGender(dto.getGender());
         emp.setSalary(dto.getSalary());
@@ -47,6 +53,6 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     // Delete the employee
     @Override
     public void deleteEmployeePayrollData(int id) {
-        employeePayrollDataList.remove(id-1);
+        employeePayrollDataList.remove(id - 1);
     }
 }

@@ -11,19 +11,26 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// Handler for @valid method exception
 @ControllerAdvice
 public class EmployeePayrollExceptionalHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception){
+    public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
 
         List<ObjectError> errorList = exception.getBindingResult().getAllErrors();
 
         List<String> errMsg = errorList.stream()
-                                .map((objErr) -> objErr.getDefaultMessage() )
-                                .toList();
+                .map((objErr) -> objErr.getDefaultMessage())
+                .toList();
 
         ResponseDTO responseDTO = new ResponseDTO("Exception while processing Rest Request", errMsg);
         return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
     }
 
+    // Handler for employeepayroll exception
+    @ExceptionHandler(EmployeePayrollException.class)
+    public ResponseEntity<ResponseDTO> handelEmployeePayrollException(EmployeePayrollException exception) {
+        ResponseDTO responseDTO = new ResponseDTO("Exception while processing Rest Request", exception.getMessage());
+        return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
+    }
 }
