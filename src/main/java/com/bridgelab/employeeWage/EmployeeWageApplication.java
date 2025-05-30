@@ -22,6 +22,7 @@ public class EmployeeWageApplication {
 		System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
 
 
+
 		ApplicationContext Context = SpringApplication.run(EmployeeWageApplication.class, args);
 		log.info("AddressBook app is started in {} Environment", Context.getEnvironment().getProperty("environment"));
 	}
