@@ -25,7 +25,7 @@ public class EmployeePayrollController {
         log.info("Fetching all contacts");
         List<EmployeePayrollData> empList = null;
         empList = employeePayrollService.getEmployeePayrollData();
-        ResponseDTO respDTO = new ResponseDTO("Get Call Successful llyyiyyu", empList);
+        ResponseDTO respDTO = new ResponseDTO("Get Call Successful", empList);
         return new ResponseEntity<>(respDTO, HttpStatus.OK);
     }
 
@@ -40,7 +40,7 @@ public class EmployeePayrollController {
     @GetMapping("/check")
     public ResponseEntity<String> getmployeePayrollData() {
 
-        return new ResponseEntity<>("pipeline check ", HttpStatus.OK);
+        return new ResponseEntity<>("pipeline check  again", HttpStatus.OK);
     }
 
     @PostMapping("/create")
