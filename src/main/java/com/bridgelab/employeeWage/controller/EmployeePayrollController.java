@@ -40,7 +40,7 @@ public class EmployeePayrollController {
     @GetMapping("/check")
     public ResponseEntity<String> getmployeePayrollData() {
 
-        return new ResponseEntity<>("pipeline check  again again", HttpStatus.OK);
+        return new ResponseEntity<>("pipeline latest check", HttpStatus.OK);
     }
 
     @PostMapping("/create")
