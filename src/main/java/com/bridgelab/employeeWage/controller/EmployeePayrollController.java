@@ -37,6 +37,11 @@ public class EmployeePayrollController {
         ResponseDTO respDTO = new ResponseDTO("Get Call For ID Successful", empData);
         return new ResponseEntity<>(respDTO, HttpStatus.OK);
     }
+    @GetMapping("/check")
+    public ResponseEntity<String> getmployeePayrollData() {
+
+        return new ResponseEntity<>("pipeline check ", HttpStatus.OK);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> addEmployeePayrollData(@Valid @RequestBody EmployeePayrollDTO empPayrollDTO) {
